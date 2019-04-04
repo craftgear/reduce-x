@@ -1,16 +1,16 @@
 {
   "name": "reduce-x",
   "version": "1.0.0",
-  "description": "provides additional reduce functionalities",
+  "description": "extra reduce functionalities, like async, split and chunk",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
-    "test": "tsc --noEmit && eslint ./src/** &&  jest --maxWorkers=2 src ",
+    "test": "eslint ./src/** && tsc --noEmit && jest --maxWorkers=2 src ",
     "build": "tsc --declaration"
   },
   "repository": {
     "type": "git",
-    "url": "hoge"
+    "url": "git@github.com:craftgear/reduce-x.git"
   },
   "keywords": [
     "reduce",
