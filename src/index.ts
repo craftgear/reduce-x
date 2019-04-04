@@ -1,69 +1,69 @@
-// const uncurry = fn => (...args) => args.reduce((accum, curr) => accum(curr), fn);
-const curry = fn => {
+export const curry = (fn: Function): Function => {
   if (fn.length === 0) {
     return fn;
   }
 
-  const _curry = args => (...arg) => {
-    const accum = [...args, ...arg];
-    if (fn.length === accum.length) {
-      return fn(...accum);
+  const recursion = (accum: any[]): Function => (...args: any[]): Function | any[] => {
+    const temp = [...accum, ...args];
+    if (fn.length === temp.length) {
+      return fn(...temp);
     }
 
-    return _curry(accum);
+    return recursion(temp);
   };
-  return _curry([]);
+  return recursion([]);
 };
 
-export const sleep = async (ms = 500) =>
-  new Promise(resolve => {
-    setTimeout(() => resolve(), ms);
-  });
+export const sleep = async (ms: number = 500): Promise<void> =>
+  new Promise(
+    (resolve: () => void): void => {
+      setTimeout((): void => resolve(), ms);
+    }
+  );
 
 // 配列の要素をn個まとめて関数で処理しつつ、インデックスをstrideづつずらしていく。
-// TODO reduceなんちゃらというモジュールを作ってnpmで公開する
-const reduceSlideWindow = (fn, init, windowSize, stride, arrayData) => {
-  const chunk = (accum, start) => {
+// export for test purpose only
+export const reduceSlideWindow = <T>(
+  fn: Function,
+  init: T,
+  windowSize: number,
+  stride: number,
+  arrayData: any[]
+): T => {
+  const recursion = (accum: T, start: number): T => {
     if (arrayData.length < start + windowSize) {
       return accum;
     }
 
     const curr = arrayData.slice(start, start + windowSize);
-    return chunk(fn(accum, curr), start + stride);
+    return recursion(fn(accum, curr), start + stride);
   };
 
-  return chunk(init, 0);
+  return recursion(init, 0);
 };
 
 // 配列の要素をn個まとめて関数で処理しつつ、インデックスを1つづつずらしていく。
-// TODO 移動平均の計算に便利、という例を書く
-// [1, 2, 3, 4, 5]
-// [1, 2]
-//    [2, 3]
-//       [3, 4]
-//          [4, 5]
-export const reduceChunk = curry((fn, init, chunkSize, data) =>
-  reduceSlideWindow(fn, init, chunkSize, 1, data)
+export const reduceChunk = curry(
+  <T>(fn: Function, init: T, chunkSize: number, data: any[]): T =>
+    reduceSlideWindow(fn, init, chunkSize, 1, data)
 );
 
 // 配列の要素をn個ずつの配列に分割して、それぞれにfnを適用する
-// [1, 2, 3, 4, 5]
-// [1, 2]
-//       [3, 4]
-export const reduceSplit = curry((fn, init, windowSize, data) =>
-  reduceSlideWindow(fn, init, windowSize, windowSize, data)
+export const reduceSplit = curry(
+  <T>(fn: Function, init: T, windowSize: number, data: any[]): T =>
+    reduceSlideWindow(fn, init, windowSize, windowSize, data)
 );
 
-// reduceAsync
-// TODO どう便利なのかの例
-export const reduceAsync = curry(async (fn, init, data) => {
-  const fold = async (accum, data) => {
-    if (data.length === 0) {
-      return accum;
-    }
-    const [head, ...tail] = data;
-    const result = await fn(accum, head);
-    return fold(result, tail);
-  };
-  return await fold(init, data);
-});
+export const reduceAsync = curry(
+  async <T>(fn: Function, init: T, data: any[]): Promise<T> => {
+    const recursion = async (accum: T, rest: any[]): Promise<T> => {
+      if (data.length === 0) {
+        return accum;
+      }
+      const [head, ...tail] = rest;
+      const result = await fn(accum, head);
+      return recursion(result, tail);
+    };
+    return recursion(init, data);
+  }
+);
