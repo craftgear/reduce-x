@@ -5,7 +5,7 @@ export const curry = (fn: Function): Function => {
 
   const recursion = (accum: any[]): Function => (...args: any[]): Function | any[] => {
     const temp = [...accum, ...args];
-    if (fn.length === temp.length) {
+    if (fn.length <= temp.length) {
       return fn(...temp);
     }
 

@@ -5,7 +5,7 @@
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
-    "test": "eslint ./src/** && tsc --noEmit && jest --maxWorkers=2 src ",
+    "test": "eslint --ignore-pattern *.spec.ts ./src/** && tsc --noEmit --pretty && jest --maxWorkers=4 src ",
     "build": "tsc --declaration"
   },
   "repository": {
@@ -14,7 +14,10 @@
   },
   "keywords": [
     "reduce",
-    "array"
+    "array",
+    "async",
+    "split",
+    "chunk"
   ],
   "author": "Shunsuke Watanabe <craftgear@gmail.com>",
   "license": "MIT",
@@ -24,14 +27,15 @@
     "@typescript-eslint/eslint-plugin": "^1.6.0",
     "@typescript-eslint/parser": "^1.6.0",
     "babel-jest": "^24.1.0",
-    "eslint": "^5.3.0",
+    "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-prettier": "^4.1.0",
+    "eslint-import-resolver-node": "^0.3.2",
     "eslint-plugin-import": "^2.16.0",
     "jest": "^24.1.0",
     "prettier": "^1.16.4",
     "ts-jest": "^24.0.0",
-    "typescript": "^3.3.3333"
+    "typescript": "^3.4.1"
   },
   "jest": {
     "preset": "ts-jest",
@@ -47,6 +51,12 @@
       "built",
       "<rootdir>/node_modules"
     ],
-    "cacheDirectory": ".jest/cache"
+    "cacheDirectory": ".jest/cache",
+    "globals": {
+        "ts-jest": {
+            "diagnostics": false
+        }
+    }
+
   }
 }
