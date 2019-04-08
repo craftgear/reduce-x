@@ -1,3 +1,4 @@
+// export for test purpose only
 export const curry = (fn: Function): Function => {
   if (fn.length === 0) {
     return fn;
@@ -21,21 +22,21 @@ export const sleep = async (ms: number = 500): Promise<void> =>
     }
   );
 
-// 配列の要素をn個まとめて関数で処理しつつ、インデックスをstrideづつずらしていく。
+// 配列の要素をkernel個まとめて関数で処理しつつ、インデックスをstrideづつずらしていく。
 // export for test purpose only
 export const reduceSlideWindow = <T>(
   fn: Function,
   init: T,
-  windowSize: number,
+  kernel: number,
   stride: number,
   arrayData: any[]
 ): T => {
   const recursion = (accum: T, start: number): T => {
-    if (arrayData.length < start + windowSize) {
+    if (arrayData.length < start + kernel) {
       return accum;
     }
 
-    const curr = arrayData.slice(start, start + windowSize);
+    const curr = arrayData.slice(start, start + kernel);
     return recursion(fn(accum, curr), start + stride);
   };
 
@@ -50,8 +51,8 @@ export const reduceChunk = curry(
 
 // 配列の要素をn個ずつの配列に分割して、それぞれにfnを適用する
 export const reduceSplit = curry(
-  <T>(fn: Function, init: T, windowSize: number, data: any[]): T =>
-    reduceSlideWindow(fn, init, windowSize, windowSize, data)
+  <T>(fn: Function, init: T, kernel: number, data: any[]): T =>
+    reduceSlideWindow(fn, init, kernel, kernel, data)
 );
 
 export const reduceAsync = curry(
@@ -67,3 +68,9 @@ export const reduceAsync = curry(
     return recursion(init, data);
   }
 );
+
+export const reduceObject = <T>(fn: Function, initialValue: T, obj: Record<string, any>): T => {
+  const keys = Object.keys(obj);
+
+  return keys.reduce((accum, key): T => fn(accum, [key, obj[key]]), initialValue);
+};
