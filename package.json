@@ -1,6 +1,6 @@
 {
   "name": "reduce-plus",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "extra reduce functionalities, like async, split and chunk",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",

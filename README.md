@@ -1,11 +1,11 @@
 # reduce-plus
 this package provides a few extra reduce functionalitis
 
-* *reduceChunk* picks N items from an array and run reduce on items, then skip one item, pick N items and reduce again until it reaches the last item.
-* *reduceSplit* splits an array into groups with N items and run reduce on each groups. It drops last items fewer than N.
-* *reduceAsync* runs async functions as reduce functions.
-* *sleep* a utility function, handy to be used with reduceAsync.
-* *reduceObject* iterates over objects' key-value pairs. It's shallow.
+* **reduceChunk** picks N items from an array and run reduce on items, then skip one item, pick N items and reduce again until it reaches the last item.
+* **reduceSplit** splits an array into groups with N items and run reduce on each groups. It drops last items fewer than N.
+* **reduceAsync** runs async functions as reduce functions.
+* **sleep** a utility function, handy to be used with reduceAsync.
+* **reduceObject** iterates over objects' key-value pairs. It's shallow.
 
 All functions are curried.
 
