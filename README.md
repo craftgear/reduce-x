@@ -18,7 +18,7 @@ This function picks items from an array and slide one by one.
 It's useful for calculating moving average or min/max in a certain period.
 
 ```
-const result = reduceChunk(fn, [], 2, [1, 2, 3, 4, 5]);
+const result = reduceChunk(fn, init, 2, [1, 2, 3, 4, 5]);
 ```
 
 runs like this:
@@ -40,7 +40,7 @@ const result = reducePair([1, 2, 3, 4, 5]);
 This function splits an array into groups, then reduce each group.
 
 ```
-const result = reduceSplit(fn, [], 2, [1, 2, 3, 4, 5]);
+const result = reduceSplit(fn, init, 2, [1, 2, 3, 4, 5]);
 ```
 
 runs like this:
@@ -89,3 +89,5 @@ const result = reduceObject(
 
 This function is also curried.
 
+## License
+MIT
