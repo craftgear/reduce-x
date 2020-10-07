@@ -1,9 +1,9 @@
 {
   "name": "reduce-plus",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "extra reduce functionalities, like async, split and chunk",
-  "main": "./lib/index.js",
-  "types": "./lib/index.d.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "test": "eslint --ignore-pattern *.spec.ts ./src/** && tsc --noEmit --pretty && jest --maxWorkers=4 src ",
     "build": "tsc --declaration"

@@ -43,12 +43,14 @@ export const reduceSlideWindow = <T>(
   return recursion(init, 0);
 };
 
+// TODO implement reduceSplitRight
 // 配列の要素をn個まとめて関数で処理しつつ、インデックスを1つづつずらしていく。
 export const reduceChunk = curry(
   <T>(fn: Function, init: T, chunkSize: number, data: any[]): T =>
     reduceSlideWindow(fn, init, chunkSize, 1, data)
 );
 
+// TODO implement reduceSplitRight
 // 配列の要素をn個ずつの配列に分割して、それぞれにfnを適用する
 export const reduceSplit = curry(
   <T>(fn: Function, init: T, kernel: number, data: any[]): T =>

@@ -1,3 +1,5 @@
+/* eslint-env jest */
+
 import {
   curry,
   reduceSlideWindow,
@@ -5,7 +7,7 @@ import {
   reduceSplit,
   reduceAsync,
   sleep,
-  reduceObject,
+  reduceObject
 } from './index';
 
 describe('curry', () => {
@@ -70,10 +72,14 @@ describe('reduceObject', () => {
   it('reduce an object into key/value pairs', () => {
     const o = {
       name: 'hoge',
-      count: 3,
+      count: 3
     };
 
-    const result = reduceObject((accum, [key, value]) => [...accum, `${key} is ${value}`], [], o);
+    const result = reduceObject(
+      (accum, [key, value]) => [...accum, `${key} is ${value}`],
+      [],
+      o
+    );
     expect(result).toEqual(['name is hoge', 'count is 3']);
   });
 });
