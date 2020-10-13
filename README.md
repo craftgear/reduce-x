@@ -1,6 +1,6 @@
 # reduce-plus
 
-[![Actions Status](https://github.com/craftgear/snake-camel/workflows/test/badge.svg)](https://github.com/craftgear/snake-camel/actions)
+[![Actions Status](https://github.com/craftgear/snake-camel/workflows/ci/badge.svg)](https://github.com/craftgear/snake-camel/actions)
 
 this package provides a few extra reduce functionalitis
 
