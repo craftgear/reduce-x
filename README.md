@@ -1,4 +1,7 @@
 # reduce-plus
+
+[![Actions Status](https://github.com/craftgear/snake-camel/workflows/ci/badge.svg)](https://github.com/craftgear/snake-camel/actions)
+
 this package provides a few extra reduce functionalitis
 
 * **reduceChunk** picks N items from an array and run reduce on items, then skip one item, pick N items and reduce again until it reaches the last item.
